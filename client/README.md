@@ -1,19 +1,22 @@
-# React + Vite
+# MSc Class Rep Selector
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React and Vite client for the MSc Computer Science class representative election platform.
 
-Currently, two official plugins are available:
+## Local setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+cp .env.example .env
+npm run dev
+```
 
-## React Compiler
+Set `VITE_API_URL` to the Express API base URL and `VITE_SOCKET_URL` to the Socket.IO server origin. These values are browser-visible; do not place secrets in client environment variables.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Checks
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+```bash
+npm run build
+npm run lint
+```
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+The client uses session storage for the JWT and authenticated Axios requests. Backend authorization remains authoritative.
