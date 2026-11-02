@@ -18,7 +18,6 @@ const emails = [
   "kelvohndungu001@gmail.com",
   "gitongasally4@gmail.com",
   "mutisorhodah202@gmail.com",
-  "juliusgakiri042@gmail.com",
 ];
 
 try {
@@ -34,13 +33,13 @@ try {
   if (!(await Election.exists({ status: "OPEN" }))) {
     await Election.create({
       title: "MSc Computer Science Class Representatives Election",
-      totalMembers: 14,
+      totalMembers: 13,
       requiredWinners: 2,
       status: "OPEN",
     });
   }
   console.log(
-    "Seed completed: 14 registered members and an open election are available.",
+    "Seed completed: 13 registered members and an open election are available.",
   );
 } catch (error) {
   console.error("Seed failed:", error.message);

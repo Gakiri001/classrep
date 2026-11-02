@@ -50,7 +50,7 @@ export async function participate(req, res, next) {
           .status(409)
           .json({ message: "You have already participated in this election." });
       const used = new Set(election.participants.map((p) => p.assignedNumber));
-      const available = Array.from({ length: 14 }, (_, i) => i + 1).filter(
+      const available = Array.from({ length: 13 }, (_, i) => i + 1).filter(
         (n) => !used.has(n),
       );
       if (!available.length)
@@ -89,22 +89,18 @@ export async function participate(req, res, next) {
         updated.participants.length === updated.totalMembers
           ? await completeElectionIfReady(updated._id)
           : null;
-      return res
-        .status(201)
-        .json({
-          message: "Participation recorded.",
-          electionId: String(updated._id),
-          assignedNumber,
-          participatedAt,
-          status: completed?.status || updated.status,
-          ...stats,
-        });
-    }
-    return res
-      .status(409)
-      .json({
-        message: "Participation conflicted with another request. Please retry.",
+      return res.status(201).json({
+        message: "Participation recorded.",
+        electionId: String(updated._id),
+        assignedNumber,
+        participatedAt,
+        status: completed?.status || updated.status,
+        ...stats,
       });
+    }
+    return res.status(409).json({
+      message: "Participation conflicted with another request. Please retry.",
+    });
   } catch (error) {
     next(error);
   }

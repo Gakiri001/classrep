@@ -59,23 +59,19 @@ export async function verifyOtp(req, res, next) {
       attempts: { $lt: 5 },
     }).sort({ createdAt: -1 });
     if (!member || !record)
-      return res
-        .status(401)
-        .json({
-          message:
-            "The code is invalid, expired, or has reached its attempt limit.",
-        });
+      return res.status(401).json({
+        message:
+          "The code is invalid, expired, or has reached its attempt limit.",
+      });
     if (!(await bcrypt.compare(otp, record.otpHash))) {
       await OTP.updateOne(
         { _id: record._id, verifiedAt: null, attempts: { $lt: 5 } },
         { $inc: { attempts: 1 } },
       );
-      return res
-        .status(401)
-        .json({
-          message:
-            "The code is invalid, expired, or has reached its attempt limit.",
-        });
+      return res.status(401).json({
+        message:
+          "The code is invalid, expired, or has reached its attempt limit.",
+      });
     }
     const used = await OTP.findOneAndUpdate(
       {
@@ -88,12 +84,10 @@ export async function verifyOtp(req, res, next) {
       { new: true },
     );
     if (!used)
-      return res
-        .status(401)
-        .json({
-          message:
-            "The code is invalid, expired, or has reached its attempt limit.",
-        });
+      return res.status(401).json({
+        message:
+          "The code is invalid, expired, or has reached its attempt limit.",
+      });
     if (!process.env.JWT_SECRET)
       throw new Error("JWT_SECRET is not configured");
     const token = jwt.sign(

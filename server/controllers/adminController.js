@@ -89,7 +89,7 @@ export async function renewElection(req, res, next) {
         [
           {
             title,
-            totalMembers: 14,
+            totalMembers: 13,
             requiredWinners: 2,
             status: "OPEN",
             participants: [],
@@ -108,21 +108,19 @@ export async function renewElection(req, res, next) {
       status: newElection.status,
       totalMembers: newElection.totalMembers,
       participantCount: 0,
-      pendingCount: 14,
+      pendingCount: 13,
       participationPercentage: 0,
       participants: [],
       pending: [],
     });
-    res
-      .status(201)
-      .json({
-        message: "New election cycle started.",
-        electionId: String(newElection._id),
-        title: newElection.title,
-        status: newElection.status,
-        totalMembers: newElection.totalMembers,
-        renewedFrom: newElection.renewedFrom,
-      });
+    res.status(201).json({
+      message: "New election cycle started.",
+      electionId: String(newElection._id),
+      title: newElection.title,
+      status: newElection.status,
+      totalMembers: newElection.totalMembers,
+      renewedFrom: newElection.renewedFrom,
+    });
   } catch (error) {
     next(error);
   } finally {

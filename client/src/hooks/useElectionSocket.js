@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { getElectionSocket } from '../services/socketService';
+import { useEffect } from "react";
+import { getElectionSocket } from "../services/socketService";
 
 export function useElectionSocket(event, handler) {
   useEffect(() => {

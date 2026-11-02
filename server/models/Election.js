@@ -8,7 +8,7 @@ const participantSchema = new mongoose.Schema(
       required: true,
     },
     email: { type: String, required: true, lowercase: true, trim: true },
-    assignedNumber: { type: Number, required: true, min: 1, max: 14 },
+    assignedNumber: { type: Number, required: true, min: 1, max: 13 },
     participatedAt: { type: Date, required: true },
   },
   { _id: false },
@@ -22,7 +22,7 @@ const winnerSchema = new mongoose.Schema(
       required: true,
     },
     email: { type: String, required: true },
-    assignedNumber: { type: Number, required: true, min: 1, max: 14 },
+    assignedNumber: { type: Number, required: true, min: 1, max: 13 },
   },
   { _id: false },
 );
@@ -30,13 +30,12 @@ const winnerSchema = new mongoose.Schema(
 const electionSchema = new mongoose.Schema(
   {
     title: { type: String, required: true, trim: true, maxlength: 160 },
-    totalMembers: { type: Number, default: 14, immutable: true },
+    totalMembers: { type: Number, default: 13, immutable: true },
     requiredWinners: { type: Number, default: 2, immutable: true },
     status: {
       type: String,
       enum: ["OPEN", "COMPLETED", "ARCHIVED"],
       default: "OPEN",
-      index: true,
     },
     participants: { type: [participantSchema], default: [] },
     winners: { type: [winnerSchema], default: [] },

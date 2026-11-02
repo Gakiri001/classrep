@@ -1,6 +1,6 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { Loader } from '../components/common/Feedback';
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { Loader } from "../components/common/Feedback";
 
 export default function ProtectedRoute() {
   const { member, loading } = useAuth();
